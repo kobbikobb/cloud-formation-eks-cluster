@@ -6,7 +6,7 @@ Parameters:
     Default: my-eks-cluster
   NumberOfWorkerNodes:
     Type: Number
-    Default: 1
+    Default: 2
   WorkerNodesInstanceType:
     Type: String
     Default: t2.micro
@@ -55,7 +55,7 @@ Resources:
         - "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 
   ###########################################
-  ## Control Plane
+  ## Eks Cluster
   ###########################################
 
   EksCluster:
@@ -68,3 +68,18 @@ Resources:
         SecurityGroupIds:
           - !ImportValue ControlPlaneSecurityGroupId
         SubnetIds: !Split [ ',', !ImportValue PrivateSubnetIds ]
+
+  EksNodegroup:
+    Type: AWS::EKS::Nodegroup
+    DependsOn: EksCluster
+    Properties:
+      ClusterName: !Ref ClusterName
+      NodeRole: !GetAtt EksNodeRole.Arn
+      ScalingConfig:
+        MinSize:
+          Ref: NumberOfWorkerNodes
+        DesiredSize:
+          Ref: NumberOfWorkerNodes
+        MaxSize:
+          Ref: NumberOfWorkerNodes
+      Subnets: !Split [ ',', !ImportValue PrivateSubnetIds ]
