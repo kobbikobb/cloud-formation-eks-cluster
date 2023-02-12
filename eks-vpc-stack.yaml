@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Amazon EKS Sample VPC - Private and Public subnets'
+Description: 'Amazon EKS VPC - Private and Public subnets'
 
 Parameters:
 
@@ -275,13 +275,13 @@ Resources:
 Outputs:
 
   PublicSubnetIds:
-    Description: Subnets IDs in the VPC
+    Description: Public Subnets IDs in the VPC
     Value: !Join [ ",", [ !Ref PublicSubnet01, !Ref PublicSubnet02 ] ]
     Export:
       Name: PublicSubnetIds
   
   PrivateSubnetIds:
-    Description: Subnets IDs in the VPC
+    Description: Private Subnets IDs in the VPC
     Value: !Join [ ",", [ !Ref PrivateSubnet01, !Ref PrivateSubnet02 ] ]
     Export:
       Name: PrivateSubnetIds
