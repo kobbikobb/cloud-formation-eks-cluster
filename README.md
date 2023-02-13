@@ -8,22 +8,13 @@ The scripts will create resources in: us-east-1
 - ./create-eks-stack.sh
 
 # How to clean up
-- ./delete-vpc-stack.sh
 - ./delete-eks-stack.sh
+- ./delete-vpc-stack.sh
 
 # Tips
 
-## AWS tuturial
-https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
-
-## Select profile
-export AWS_PROFILE=user1
-
 ## Update Kubeconfig
 aws eks update-kubeconfig --region us-east-1 --name my-eks-cluster
-
-## Kubectl
-kubectl get all
 
 ## Install an ingress controller
 https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
